@@ -1,0 +1,35 @@
+import math
+
+# Função para calcular a altura de respingo
+def calcular_respingo(significant_wave_height, safety_factor=1.5):
+    """Calcula altura da zona de respingo baseada na altura significativa de onda (em metros)."""
+    return significant_wave_height * safety_factor
+
+# Função para simular operação de içamento
+def simular_elevacao(carga_altura, altura_respingo):
+    """Simula se a carga está segura ou dentro da zona de respingo."""
+    if carga_altura > altura_respingo:
+        return "Operação segura: carga acima da zona de respingo."
+    else:
+        return "Alerta: carga dentro da zona de respingo!"
+
+# Interface simples para o usuário
+def app_simulacao():
+    print("=== Simulador de Elevação Offshore ===")
+    try:
+        significant_wave_height = float(input("Digite a altura significativa das ondas (m): "))
+        carga_altura = float(input("Digite a altura atual da carga (m): "))
+        
+        altura_respingo = calcular_respingo(significant_wave_height)
+        print(f"\nAltura estimada da zona de respingo: {altura_respingo:.2f} m")
+        
+        resultado = simular_elevacao(carga_altura, altura_respingo)
+        print("\nResultado da Simulação:")
+        print(resultado)
+
+    except ValueError:
+        print("Erro: Por favor, insira apenas valores numéricos.")
+
+# Executar aplicativo
+if __name__ == "__main__":
+    app_simulacao()
